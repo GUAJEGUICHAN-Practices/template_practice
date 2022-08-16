@@ -63,9 +63,19 @@ const Index = ({ posts, }) => {
 export default Index;
 
 export const getStaticProps = async () => {
-  const files = fs.readdirSync(path.join('posts'))
+  const dir = path.join('posts')
+  const files = fs.readdirSync(dir)
+  const files_sorted = files.map(function (v) {
+    return {
+      name: v,
+      time: new Date(fs.statSync(dir + '/' + v).birthtime).getTime(),
+    };
+  })
+    .sort(function (a, b) { return a.time - b.time; })
+    .map(function (v) { return v.name; });
 
-  const posts = files.map(filename => {
+  console.log(files_sorted)
+  const posts = files_sorted.map(filename => {
     const markdownWithMeta = fs.readFileSync(path.join('posts', filename), 'utf-8')
     const { data: frontMatter } = matter(markdownWithMeta)
 
