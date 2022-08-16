@@ -1,27 +1,83 @@
 import * as React from 'react';
-import { useSelector } from 'react-redux';
-import { setTitle } from '../store/actions';
-import wrapper from '../store/configureStore';
+import fs from 'fs'
+import path from 'path'
+import matter from 'gray-matter'
 
+// import styled from '@emotion/styled';
+import styles from '../styles/index.module.css'
+import Link from 'next/link';
+import { PostGate } from '../Components/PostGate';
+import { useRouter } from 'next/router';
+import { Header } from '../Components/Header';
 
-export const getStaticProps = wrapper.getStaticProps(store => () => {
-  store.dispatch(setTitle('Timothy'))
-  const { title } = store.getState()
-  return {
-    props: { test: title }, // will be passed to the page component as props
-  }
-});
+const Index = ({ posts, }) => {
+  // const state = useSelector<string, string>(state => state)
+  // const titles = posts.map(post => post.frontMatter.title)
+  // console.log(titles)
+  // const router = useRouter()
+  // React.useEffect(() => {
+  //   posts.map(post => {
+  //     router.prefetch(`/detail/${post.slug}`)
+  //   })
 
-
-const Index = ({ test, }) => {
-  const state = useSelector<string, string>(state => state);
-  console.log(state)
+  // }, [])
 
   return (
-    <div>
-      <h2>index page !!{test}</h2>
-    </div>
+    <>
+      {/* <div className={styles.empty} /> */}
+      <div className={[styles.position].join(' ')}>
+        <Header title='코테 영역' page_number={1} />
+        <main className={styles.main_layout}>
+          <div className={[styles.main_column, styles.middle_line].join(' ')}>
+            {posts.map((post, index) =>
+              <PostGate
+                key={post.slug}
+                number={index + 1}
+                title={post.frontMatter.title}
+                description={post.frontMatter.description}
+                date={post.frontMatter.date}
+                slug={post.slug}
+              />
+              // <div className={[styles.font_JoongMyongJo, styles._2rem].join(' ')}>
+              //   <span>{index + 1}. </span>
+              //   <Link
+              //     href={`/detail/${post.slug}`}
+              //   >
+              //     {post.frontMatter.title}
+              //   </Link>
+              // </div>
+            )}
+
+          </div>
+          <div className={styles.main_column}>column2</div>
+        </main>
+        <footer className={styles.footer_position}>
+          <span>푸터</span>
+        </footer>
+      </div>
+      {/* <div className={styles.empty} /> */}
+    </>
   );
 };
 
 export default Index;
+
+export const getStaticProps = async () => {
+  const files = fs.readdirSync(path.join('posts'))
+
+  const posts = files.map(filename => {
+    const markdownWithMeta = fs.readFileSync(path.join('posts', filename), 'utf-8')
+    const { data: frontMatter } = matter(markdownWithMeta)
+
+    return {
+      frontMatter,
+      slug: filename.split('.')[0]
+    }
+  })
+
+  return {
+    props: {
+      posts
+    }
+  }
+}
