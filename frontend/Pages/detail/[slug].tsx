@@ -15,7 +15,7 @@ const components = { SyntaxHighlighter }
 const DetailPage = ({ frontMatter: { title, date }, mdxSource }) => {
   return (
     <div className={style.position}>
-      <Header title='코테 영역' page_number={1} />
+      <Header title='블 로 그' page_number={1} />
       <div className={[style.font_JoongMyongJo].join(' ')}>
         <h1 className={style.grid_center}>{title}</h1>
         <div className={[style.date_container].join(' ')}>{date}</div>
