@@ -1,0 +1,91 @@
+.font_ShinGrapic_3rem {
+  font-family: "ShinGraphic" , sans-serif;
+  /* font-family: 'Rubik Distressed', cursive; */
+  /* font-weight: bold; */
+  color: black;
+  font-size: 3rem;
+}
+
+.font_JoongMyongJo_3rem {
+  font-family: "JoongMyongJo_M", sans-serif;
+  color: black;
+  font-size: 3rem;
+}
+
+.font_JoongMyongJo{
+  font-family: "JoongMyongJo_M", sans-serif;
+  color: black;
+}
+
+._3rem{
+  font-size: 3rem;
+}
+
+._2rem{
+  font-size: 2rem;
+}
+._1rem{
+  font-size: 1rem;
+}
+
+.position{
+  /* display: grid;
+  place-items: center; */
+  width: 100%;
+  height: 100%;
+  flex: 3 1 200px; /*  Stretching: */
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+.header_position{
+  /* display: grid;
+  place-items: center; */
+  /* display: flex;
+  flex-direction: row; */
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+  padding-top:2rem;
+  padding-bottom:1rem;
+}
+.header_middle{
+  /* background-color: brown; */
+  display: grid;
+  place-items:center;
+}
+.header_right{
+  position:relative;
+  display: grid;
+  /* place-items: center; */
+  place-items: end end;
+  top: 10px; 
+}
+
+.empty{
+  flex: 1 1 150px; /*  Stretching: */
+  /* background-color: white; */
+}
+
+.main_layout{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.middle_line{
+  border-right: 1px solid black;
+}
+
+.main_column{
+  flex: 1 1 150px; /*  Stretching: */
+  /* background-color: aqua; */
+}
+
+.footer_position{
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}

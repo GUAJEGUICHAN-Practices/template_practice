@@ -13,19 +13,25 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@next/mdx": "^12.2.4",
     "@redux-devtools/extension": "^3.2.2",
     "@reduxjs/toolkit": "^1.8.3",
+    "@types/mdx": "^2.0.2",
+    "gray-matter": "^4.0.3",
     "next": "^12.2.4",
+    "next-mdx-remote": "^4.1.0",
     "next-redux-wrapper": "^7.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.2",
+    "react-syntax-highlighter": "^15.5.0",
     "redux": "^4.2.0"
   },
   "devDependencies": {
     "@types/node": "^18.6.4",
     "@types/react": "^18.0.15",
     "@types/react-redux": "^7.1.24",
+    "@types/react-syntax-highlighter": "^15.5.4",
     "typescript": "^4.7.4"
   }
 }
