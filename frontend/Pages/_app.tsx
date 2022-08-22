@@ -4,6 +4,8 @@ import * as React from 'react';
 import wrapper from '../store/configureStore'
 import "../styles/global.css";
 
+import { SessionProvider } from "next-auth/react";
+
 import styles from '../styles/index.module.css'
 
 const App = ({ Component, pageProps }: AppProps) => {
@@ -13,7 +15,9 @@ const App = ({ Component, pageProps }: AppProps) => {
         <title>⌨️코테모아</title>
       </Head>
       <div className={styles.empty} />
-      <Component {...pageProps} />
+      <SessionProvider session={pageProps.session}>
+        <Component {...pageProps} />
+      </SessionProvider>
       <div className={styles.empty} />
 
     </>
