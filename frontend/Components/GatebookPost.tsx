@@ -1,7 +1,12 @@
-import React from 'react'
+import { Button, Input, message } from 'antd';
+import axios from 'axios';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
+import React, { useState } from 'react'
 import style from '../styles/guestbook.module.css'
 import GuestBookPostMenu from './GuestBookPostMenu'
 const GatebookPost = ({
+  is_mine,
   id,
   author,
   content,
@@ -9,21 +14,77 @@ const GatebookPost = ({
   date
 }) => {
   const date_string = date.toString().slice(0, 10);
-  // console.log(date_string)
-  // console.log(typeof date)
+  const [editMode, setEditMode] = useState(false)
+  const [newContent, setNewContent] = useState(content)
+  const router = useRouter()
+
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setNewContent(e.target.value)
+  };
+  const handleUpdate = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    try {
+      const result = await axios.put(`/api/post/${id}`, {
+        content: newContent
+      })
+      if (result.data.ok) {
+        await router.replace(router.asPath)//getServerSideProps를 다시 부른다.
+        setEditMode(false)//상태는 그대로이까 false로 변경해준다.
+        message.success("수정에 성공했습니다.")
+      }
+    } catch (e) {
+      message.error(e)
+    }
+  }
+
   return (
     <main className='grid grid-rows-[auto_1fr_auto] mx-8 py-4 border-b-gray-500 border-b-[1px]
     first:border-t-[1px]  first:border-t-gray-500
     '>
       <div className='flex justify-between'>
         <div className=' font-bold text-base'>{author}</div>
-        <GuestBookPostMenu />
+        {is_mine && !editMode ?
+          <GuestBookPostMenu
+            id={id}
+            setEditMode={setEditMode}
+          /> : <div></div>
+        }
       </div>
-      <div className='text-base mb-4'>{content}</div>
-      <footer className='flex justify-between '>
-        <div className='text-xs text-zinc-700'>{date_string}</div>
-        <div className='text-xs text-zinc-700'>댓글</div>
-      </footer>
+
+      {
+        editMode ?
+          <Input.TextArea
+            showCount
+            maxLength={100}
+            value={newContent}
+            onChange={handleChange}
+          /> :
+          <div className='text-base mb-4'>
+            {content}
+          </div>
+      }
+      {
+        editMode ?
+          <div className='flex flex-end'>
+            <Button
+              onClick={() => {
+                setEditMode(false)
+              }}
+            >
+              수정 취소
+            </Button>
+            <Button
+              onClick={handleUpdate}
+            >
+              수정 완료
+            </Button>
+          </div> :
+          <footer className='flex justify-between '>
+            <div className='text-xs text-zinc-700'>{date_string}</div>
+            <div className='text-xs text-zinc-700'>댓글</div>
+          </footer>
+      }
+
     </main>
   )
 }
