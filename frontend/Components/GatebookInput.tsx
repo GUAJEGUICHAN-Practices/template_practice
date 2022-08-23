@@ -1,4 +1,4 @@
-import { Input, Button } from 'antd';
+import { Input, Button, notification, message } from 'antd';
 import axios from 'axios';
 import React, { useState } from 'react'
 import style from '../styles/PostGate.module.css'
@@ -11,18 +11,34 @@ const GatebookInput = ({ author_email
   };
   // const { TextArea } = Input
   const { TextArea } = Input;
-  const handleSubmit = (e) => {
-    axios.post('/post/addPost', {
-      content,
-      author_email
-    })
+  const handleSubmit = async (e) => {
+    if (author_email) {
+      const res = await axios.post('/api/post/addPost', {
+        content,
+        author_email
+      })
+      console.log('res', res)
+      if (res.data.ok) {
+        notification.open({
+          message: '방명록에 성공적으로 글을 남겼습니다.',
+          description:
+            '',
+          onClick: () => {
+            console.log('Notification Clicked!');
+          },
+        });
+      } else {
+        message.error('글올리기에 실패했습니다.');
+      }
+    } else {
+      message.error('글올리기에 실패했습니다.');
+    }
   }
-  // const
   return (
     <div className="m-8 grid grid-rows-[auto_auto]">
       <TextArea showCount maxLength={100} onChange={onChange} />
       <div className="flex justify-end gap-1 mt-6">
-        <Button type='primary' >올리기</Button>
+        <Button type='primary' onClick={handleSubmit} >올리기</Button>
         {/* <Button type='primary' ghost  >비밀글</Button> */}
       </div>
     </div>
