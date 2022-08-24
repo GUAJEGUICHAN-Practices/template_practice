@@ -22,43 +22,33 @@ export default NextAuth({
             email: email
           },
           select: {
+            name: true,
             password: true
           }
         })
 
         const match = await bcrypt.compare(password, result.password);
-        // bcrypt.compare(password, result.password, function (err, result) {
-        //   console.log('bcrypt result', result)
         if (match) {
           return {
             email,
+            name: result.name,
             state: "good"
           }
           // res.json({ ok: true });
         } else {
           throw new Error("로그인 정보가 일치하지 않습니다")
-          // throw err
-          // throw new Error(err)
-          // res.json({ ok: false, msg: "비밀번호가 틀립니다." });
         }
-        // console.log('credentials', email, password)
-        // const res = await axios.post('/api/login', {
-        //   email,
-        //   password
-        // })
-        // if (res.data.ok) {
-        //   return {
-        //     email,
-        //     state: "good"
-        //   }
-        // } else {
-        //   throw new Error(res.data.msg)
-        // }
       }
     })
   ],
   pages: {
     signIn: '/login'
   },
-  secret: process.env.NEXTAUTH_SECRET
+  secret: process.env.NEXTAUTH_SECRET,
+  callbacks: {
+    async session({ session, token, user }) {
+      return session
+    },
+
+  }
 })
