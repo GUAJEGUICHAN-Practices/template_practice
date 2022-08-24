@@ -3,27 +3,16 @@ import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
 
-// import styled from '@emotion/styled';
 import styles from '../styles/index.module.css'
-import Link from 'next/link';
+
 import { PostGate } from '../Components/PostGate';
 import { useRouter } from 'next/router';
 import { Header } from '../Components/Header';
 
 const Index = ({ posts, posts_column_1, posts_column_2, page, num_page }) => {
-  // const state = useSelector<string, string>(state => state)
-  // const titles = posts.map(post => post.frontMatter.title)
-  // console.log(titles)
-  // const router = useRouter()
-  // React.useEffect(() => {
-  //   posts.map(post => {
-  //     router.prefetch(`/detail/${post.slug}`)
-  //   })
-  // }, [])
   const router = useRouter()
   return (
     <>
-      {/* <div className={styles.empty} /> */}
       <div className={[styles.position].join(' ')}>
         <Header title='블 로 그' page_number={page} />
         <main className={styles.main_layout}>
@@ -37,14 +26,6 @@ const Index = ({ posts, posts_column_1, posts_column_2, page, num_page }) => {
                 date={post.frontMatter.date}
                 slug={post.slug}
               />
-              // <div className={[styles.font_JoongMyongJo, styles._2rem].join(' ')}>
-              //   <span>{index + 1}. </span>
-              //   <Link
-              //     href={`/detail/${post.slug}`}
-              //   >
-              //     {post.frontMatter.title}
-              //   </Link>
-              // </div>
             )}
 
           </div>
@@ -76,13 +57,9 @@ const Index = ({ posts, posts_column_1, posts_column_2, page, num_page }) => {
                 {index + 1}
               </span>
             )
-            // for(let i = 0; i < 2; i++){
-            // console.log(1)
-            // }
           }
         </footer>
       </div>
-      {/* <div className={styles.empty} /> */}
     </>
   );
 };

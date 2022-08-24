@@ -7,20 +7,9 @@ import style from '../styles/login.module.css'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import { signIn } from 'next-auth/react'
-// import { PrismaClient } from '@prisma/client'
-
-// const fetcher = url => fetch(url, {
-//   mode: "cors",
-//   method: "POST",
-
-// }
-// ).then(r => r.json())
 
 const signup = () => {
   const router = useRouter();
-  // const { data, error } = useSWR('/api/signup', fetcher)
-
-
   const [userInfo, setUserInfo] = useState({
     email: "",
     username: "",

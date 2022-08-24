@@ -22,7 +22,6 @@ const login = () => {
       password: userInfo.password,
       redirect: false,
     }).then((res: SignInResponse) => {
-      console.log(res)
       if (res.ok) {
         console.log("로그인 성공")
         router.push(`/`)
