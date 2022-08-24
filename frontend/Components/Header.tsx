@@ -22,7 +22,7 @@ export const Header = ({ title, page_number }) => {
         <div
           className={style.grid9}
           onClick={() => {
-            router.push('/guestbook')
+            router.push('/guestbook/1')
           }}
         >
           방명록
