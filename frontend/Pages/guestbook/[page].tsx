@@ -46,6 +46,7 @@ const guestbook = ({ page_number, posts, totalPosts }) => {
               posts.map(post => (
                 <GatebookPost
                   is_mine={post.author.email === session?.user?.email}
+                  session_email={session?.user?.email}
                   author={post.author.name}
                   content={post.content}
                   date={post.createdAt}
@@ -84,6 +85,7 @@ export const getServerSideProps = async ({ params: { page } }) => {
       where: {
         published: true
       },
+
       select: {
         author: {
           select: {
@@ -92,7 +94,15 @@ export const getServerSideProps = async ({ params: { page } }) => {
           }
         },
         content: true,
-        comments: true,
+        comments: {
+          include: {
+            author: {
+              select: {
+                name: true
+              }
+            }
+          }
+        },
         createdAt: true,
         id: true
       },
@@ -102,8 +112,10 @@ export const getServerSideProps = async ({ params: { page } }) => {
     prisma.post.count(),
   ])
 
-
-  console.log(posts, totalPosts)
+  posts.forEach(p => {
+    console.log(p.comments)
+  })
+  // console.log(posts)
   return {
     props: {
       page_number: page,
