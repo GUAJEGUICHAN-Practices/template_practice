@@ -1,17 +1,60 @@
 import React from 'react'
-import styles from '../styles/index.module.css'
+import style from '../styles/index.module.css'
+
+import { useRouter } from 'next/router'
+import { useSession, signIn, signOut } from 'next-auth/react'
 
 export const Header = ({ title, page_number }) => {
+  const { data: session } = useSession()
+  const router = useRouter()
+  // console.log('session', session)
   return (
-    <header className={styles.header_position}>
-      <div>
-        <span></span>
+    <header className={style.two_rows_grid}>
+      <div className={style.top_header}>
+        <div
+          className={style.grid1}
+          onClick={() => {
+            router.push(`/`)
+          }}
+        >
+          Home
+        </div>
+        <div
+          className={style.grid9}
+          onClick={() => {
+            router.push('/guestbook/1')
+          }}
+        >
+          방명록
+        </div>
+        {session ?
+          <div className={style.grid10}
+            onClick={() => {
+              signOut({
+                redirect: true,
+                callbackUrl: "/"
+              })
+            }}
+          >로그아웃</div>
+          :
+          <div className={style.grid10}
+            onClick={() => {
+              signIn()
+            }}
+          >로그인</div>
+        }
       </div>
-      <div className={[styles.font_ShinGrapic_3rem, styles.header_middle].join(' ')}>
-        <span>{title}</span>
+      <div className={style.header_position}>
+        <div>
+          <span></span>
+        </div>
+        <div className={[style.font_ShinGrapic_3rem, style.header_middle].join(' ')}>
+          <span>{title}</span>
+        </div>
+        <div className={[style.header_right, style.font_JoongMyongJo_3rem].join(' ')}>
+          <span>{page_number}</span>
+        </div>
       </div>
-      <div className={[styles.header_right, styles.font_JoongMyongJo_3rem].join(' ')}>
-        <span>{page_number}</span>
-      </div>
-    </header>)
+    </header>
+  )
 }
