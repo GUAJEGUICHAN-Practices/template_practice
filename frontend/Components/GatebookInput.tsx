@@ -11,11 +11,13 @@ const GatebookInput = ({ author_email
     setContent(e.target.value)
   };
   const { TextArea } = Input;
+  const [isLoading, setLoading] = useState(false)
   const handleSubmit = async (e) => {
     if (content === '') {
       return message.error('글올리기에 실패했습니다.');
     }
     if (author_email) {
+      setLoading(true)
       const res = await axios.post('/api/post/addPost', {
         content,
         author_email
@@ -26,11 +28,13 @@ const GatebookInput = ({ author_email
           description:
             '',
         });
-        await router.replace(router.asPath)
+        await router.replace('/guestbook/1')
         setContent('')
+
       } else {
         message.error('글올리기에 실패했습니다.');
       }
+      setLoading(false)
     } else {
       message.error('글올리기에 실패했습니다.');
     }
@@ -39,7 +43,7 @@ const GatebookInput = ({ author_email
     <div className="m-8 grid grid-rows-[auto_auto]">
       <TextArea showCount maxLength={100} value={content} onChange={handleChange} />
       <div className="flex justify-end gap-1 mt-6">
-        <Button type='primary' onClick={handleSubmit} >올리기</Button>
+        <Button loading={isLoading} type='primary' onClick={handleSubmit} >올리기</Button>
         {/* <Button type='primary' ghost  >비밀글</Button> */}
       </div>
     </div>
