@@ -1,6 +1,4 @@
 import React, { FormEventHandler, useState } from 'react'
-import useSWR from 'swr'
-
 import { Header } from '../Components/Header'
 import style from '../styles/login.module.css'
 
@@ -17,7 +15,6 @@ const signup = () => {
     checkPassword: ""
   })
 
-  // const prisma = new PrismaClient()
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (userInfo.password === userInfo.checkPassword) {

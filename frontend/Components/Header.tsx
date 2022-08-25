@@ -7,7 +7,7 @@ import { useSession, signIn, signOut } from 'next-auth/react'
 export const Header = ({ title, page_number }) => {
   const { data: session } = useSession()
   const router = useRouter()
-  console.log('session', session)
+  // console.log('session', session)
   return (
     <header className={style.two_rows_grid}>
       <div className={style.top_header}>
@@ -30,7 +30,10 @@ export const Header = ({ title, page_number }) => {
         {session ?
           <div className={style.grid10}
             onClick={() => {
-              signOut()
+              signOut({
+                redirect: true,
+                callbackUrl: "/"
+              })
             }}
           >로그아웃</div>
           :
