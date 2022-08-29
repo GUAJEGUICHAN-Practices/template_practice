@@ -1,0 +1,31 @@
+.container{
+  cursor: pointer;
+
+  position: relative;
+  margin: 15px;
+  top:0px;
+  right: 0px;
+  border: 1px solid rgba(0,0,0,0);;
+  display: grid;
+  grid-template-rows: auto auto ;
+  transition: 0.3s;
+}
+.container:hover{
+  /* background-color: blue; */
+  top:-3px;
+  right: 3px;
+  border: 1px solid rgba(0,0,0,0.35);;
+  box-shadow: 10px 5px 5px rgba(0,0,0,0.35);
+  transition: 0.3s;
+}
+.title_container{
+  /* background-color: aquamarine; */
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+}
+.date_container{
+  /* background-color: red; */
+  display: grid;
+  place-items: end end;
+  margin-top: 10px;
+}

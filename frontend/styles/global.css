@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import 'antd/dist/antd.css';
+
+
+html,body{
+  padding:0;
+  margin:0;
+  background-color: #f2ebc9;
+}
+/* body{
+  width: 100vw;
+  height: 100vh;
+} */
+#__next{
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: auto 1000px auto;
+  /* display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: row; */
+}
+@font-face {
+  font-family: "ShinGraphic";
+  src: url('../public/fonts/신그래픽체.ttf') 
+}
+@font-face {
+  font-family: "JoongMyongJo_M";
+  src: url('../public/fonts/HYMyeongJo-Medium.ttf') 
+}
+@font-face {
+  font-family: "JoongMyongJo";
+  src: url('../public/fonts/HY중명조.ttf')
+  /* font-weight: normal;
+  font-style: normal; */
+}
+
+@font-face {
+  font-family: "GyeonMyongJo";
+  src: url('../public/fonts/HY견명조.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+  
+@font-face {
+  font-family: "TeaGothic";
+  src: url('../public/fonts/HY태고딕.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "DeeNaRoo";
+  src: url('../public/fonts/a디나루.ttf');
+}
+
+[type=button], [type=reset], [type=submit], button{
+  background-color: #1890ff;
+}
