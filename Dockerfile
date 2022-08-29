@@ -6,7 +6,7 @@ ADD . /app/
 
 RUN rm yarn.lock || true
 RUN rm package-lock.json || true
-RUN npm run build
+RUN npm i -f && npm audit fix && npm run build
 
 ENV HOST 0.0.0.0
 EXPOSE 3000
