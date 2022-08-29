@@ -21,10 +21,11 @@ const login = () => {
       email: userInfo.email,
       password: userInfo.password,
       redirect: false,
-    }).then((res: SignInResponse) => {
+    }).then(async (res: SignInResponse) => {
       if (res.ok) {
         console.log("로그인 성공")
-        router.push(`/`)
+        await router.replace(router.asPath)
+        await router.push(`/`)
       } else {
         console.log("로그인 실패")
         console.log(res.error)
