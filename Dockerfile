@@ -4,6 +4,7 @@ RUN mkdir -p /app
 WORKDIR /app
 ADD . /app/
 
+WORKDIR /app/frontend
 RUN rm yarn.lock || true
 RUN rm package-lock.json || true
 RUN npm i -f && npm audit fix
