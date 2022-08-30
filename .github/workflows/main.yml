@@ -10,6 +10,8 @@ env:
   DOCKER_IMAGE: ghcr.io/guajeguichan/template_practice
   VERSION: ${{ github.sha }}
   NAME: blog_cicd
+  NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+  DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
 jobs:
   # 빌드 Job
@@ -60,4 +62,4 @@ jobs:
       - name: Docker run
         run: |
           docker stop ${{ env.NAME }} && docker rm ${{ env.NAME }} && docker rmi ${{ env.DOCKER_IMAGE }}:latest
-          docker run -d -p 80:3000 --name blog_cicd --restart always ${{ env.DOCKER_IMAGE }}:latest
+          docker run -d -p 80:3000  -e NEXTAUTH_SECRET=${{ env.NEXTAUTH_SECRET }} -e DATABASE_URL=${{ env.DATABASE_URL }}  --name blog_cicd --restart always ${{ env.DOCKER_IMAGE }}:latest
