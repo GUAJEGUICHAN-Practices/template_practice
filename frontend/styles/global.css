@@ -25,42 +25,36 @@ html,body{
 }
 @font-face {
   font-family: "ShinGraphic";
-  /* src: url('../public/fonts/신그래픽체.ttf')  */
-  src: url('/public/fonts/shingrphic.ttf') 
+  src: url('../public/fonts/shingrphic.ttf');
 }
 @font-face {
   font-family: "JoongMyongJo_M";
-  /* src: url('../public/fonts/HYMyeongJo-Medium.ttf')  */
-  src: url('/public/fonts/HYMyeongJo-Medium.ttf') 
+  src: url('../public/fonts/HYMyeongJo-Medium.ttf') ;
 }
 @font-face {
   font-family: "JoongMyongJo";
-  /* src: url('../public/fonts/HY중명조.ttf') */
-  src: url('/public/fonts/jungmyeongjo.ttf')
+  src: url('../public/fonts/jungmyeongjo.ttf');
   /* font-weight: normal;
   font-style: normal; */
 }
 
 @font-face {
   font-family: "GyeonMyongJo";
-  /* src: url('../public/fonts/HY견명조.ttf') format('ttf'); */
-  src: url('/public/fonts/gyeonmyeongjo.ttf') format('ttf');
+  src: url('../public/fonts/gyeonmyeongjo.ttf') ;
   font-weight: normal;
   font-style: normal;
 }
   
 @font-face {
   font-family: "TeaGothic";
-  /* src: url('../public/fonts/HY태고딕.ttf') format('ttf'); */
-  src: url('/public/fonts/teagothic.ttf') format('ttf');
+  src: url('../public/fonts/teagothic.ttf') ;
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "DeeNaRoo";
-  /* src: url('../public/fonts/a디나루.ttf'); */
-  src: url('/public/fonts/deenaroo.ttf');
+  src: url('../public/fonts/deenaroo.ttf') format('ttf');
 }
 
 [type=button], [type=reset], [type=submit], button{
